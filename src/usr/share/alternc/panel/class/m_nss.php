@@ -42,29 +42,34 @@ class m_nss
         $this->passwd_file = implode("\n", $lines);
     }
 
-    public function write_files()
+    public function update_files()
     {
         $this->define_files();
-        $this->write_group_file();
-        $this->write_passwd_file();
+        $this->update_group_file();
+        $this->update_passwd_file();
     }
 
 
-    protected function write_group_file()
+    protected function update_group_file()
     {
         $file = "/var/lib/extrausers/group";
         $content = file_get_contents($file);
-        $content = preg_replace('/##ALTERNC ACCOUNTS START##.*##ALTERNC ACCOUNTS END##/ms', '', $content);
-        $content .= $this->group_file;
+        $content = preg_replace('/##ALTERNC ACCOUNTS START##.*##ALTERNC ACCOUNTS END##/ms', $this->group_file, $content, -1, $count);
+        if ($count == 0) {
+            $content .= $this->group_file;
+        }
         return file_put_contents($file, $content, LOCK_EX);
     }
 
-    protected function write_passwd_file()
+    protected function update_passwd_file()
     {
         $file = "/var/lib/extrausers/passwd";
         $content = file_get_contents($file);
-        $content = preg_replace('/##ALTERNC ACCOUNTS START##.*##ALTERNC ACCOUNTS END##/ms', '', $content);
-        $content .= $this->passwd_file;
+        $content = preg_replace('/##ALTERNC ACCOUNTS START##.*##ALTERNC ACCOUNTS END##/ms', $this->passwd_file, $content, -1, $count);
+        if ($count == 0) {
+            $content .= $this->passwd_file;
+        }
+
         return file_put_contents($file, $content, LOCK_EX);
     }
 }
