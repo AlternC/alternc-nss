@@ -19,9 +19,11 @@ class m_nss
         global $db;
         $db->query("SELECT login,uid FROM `membres`");
         $lines=array();
+        $lines[]='##ALTERNC ACCOUNTS START##';
         while ($db->next_record()) {
             $lines[] = $db->f('login').":x:".$db->f('uid').":";
         }
+        $lines[]='##ALTERNC ACCOUNTS END##';
 
         $this->group_file = implode("\n", $lines);
     }
@@ -31,9 +33,11 @@ class m_nss
         global $db;
         $db->query("SELECT login,uid FROM `membres`");
         $lines=array();
+        $lines[]='##ALTERNC ACCOUNTS START##';
         while ($db->next_record()) {
             $lines[] = $db->f('login').":x:".$db->f('uid').":".$db->f('uid').":::/bin/false";
         }
+        $lines[]='##ALTERNC ACCOUNTS END##';
 
         $this->passwd_file = implode("\n", $lines);
     }
