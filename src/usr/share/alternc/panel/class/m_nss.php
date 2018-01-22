@@ -7,6 +7,18 @@ class m_nss
 {
     protected $group_file;
     protected $passwd_file;
+    /** Hook function called when a user is created
+     * This function add acccount to nss file
+     * globals $cuid is the appropriate user
+     *
+     * @return void
+     */
+    public function hook_admin_add_member()
+    {
+        global $msg;
+        $msg->log("nss", "hook_admin_add_member");
+        $this->update_files();
+    }
 
     public function define_files()
     {
