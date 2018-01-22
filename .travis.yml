@@ -1,0 +1,30 @@
+language : bash
+before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install -y ruby ruby-dev rubygems-integration build-essential po-debconf
+    - gem install --no-ri --no-rdoc fpm
+install:
+    - make
+deploy:
+    - provider: bintray
+      skip_cleanup: true
+      file: .bintray.json
+      user: camlafit
+      key:
+          secure: BTG7S9yu7f1GsOTfL1vXcN8SduNqv5KGg5tax4XY8eVLh3GyDjYK46tRQfYR/wLRwzNXb2MFv9RAzG8tOfu1uyGjz8tR4d2vLwjeeueVIBkEKBx1IDv52PyuMzKAJ+dmhw9j4Lby+DK981ywQ+6m4PkIoZchj62l9OxPakzRLYw6yuybKu2lvzLp/w9hXmKc1HDuqMb+Y26otXuMEvastyFM1uiLMr12LrdKlNHfm0mlwSa+M+NzVRfnCDaMiziBI6HdRoIDq01YFwags8vs3ENU2ZOSUdj8o/qmTVVvm+dCA48ty64nNqo4WrQT6RToAAq6VnIsW5ys/w+hOVwi+puHhwmhghfaNTbIOFdV8CCLVVQsAfIH26m30bRuwqYQj9xVO77ey/2iSLwVJOOQDeBUHKaoaP01ONDuXEzhmOkceocxJMl4GV9Spwjr6ASW8L98y0zw9DmFwCDoaDbmmKCz965aR6A8MN0b7C+LYWMfxLSAhrqOU2gmzDyKawhaAvlxVfXlj/zxRHroiOOr1sW0cVXD7rmO1AYRfhztB1pW0rhB3/E3TAoyf/dGSIrcLsePqes941NTx4//aeqTFswYHAlh28KtCNjwrtJtlYbp1XkZqsy8VMXPwjDXule4XU5M5q6hLj9npjo5bMIj8rsCxepAilEC0miW2Bdo8tY=
+    - provider: bintray
+      skip_cleanup: true
+      file: .bintray.release.json
+      user: camlafit
+      key:
+          secure: BTG7S9yu7f1GsOTfL1vXcN8SduNqv5KGg5tax4XY8eVLh3GyDjYK46tRQfYR/wLRwzNXb2MFv9RAzG8tOfu1uyGjz8tR4d2vLwjeeueVIBkEKBx1IDv52PyuMzKAJ+dmhw9j4Lby+DK981ywQ+6m4PkIoZchj62l9OxPakzRLYw6yuybKu2lvzLp/w9hXmKc1HDuqMb+Y26otXuMEvastyFM1uiLMr12LrdKlNHfm0mlwSa+M+NzVRfnCDaMiziBI6HdRoIDq01YFwags8vs3ENU2ZOSUdj8o/qmTVVvm+dCA48ty64nNqo4WrQT6RToAAq6VnIsW5ys/w+hOVwi+puHhwmhghfaNTbIOFdV8CCLVVQsAfIH26m30bRuwqYQj9xVO77ey/2iSLwVJOOQDeBUHKaoaP01ONDuXEzhmOkceocxJMl4GV9Spwjr6ASW8L98y0zw9DmFwCDoaDbmmKCz965aR6A8MN0b7C+LYWMfxLSAhrqOU2gmzDyKawhaAvlxVfXlj/zxRHroiOOr1sW0cVXD7rmO1AYRfhztB1pW0rhB3/E3TAoyf/dGSIrcLsePqes941NTx4//aeqTFswYHAlh28KtCNjwrtJtlYbp1XkZqsy8VMXPwjDXule4XU5M5q6hLj9npjo5bMIj8rsCxepAilEC0miW2Bdo8tY=
+      on:
+          tags: true
+    - provider: releases
+      skip_cleanup: true
+      file_glob: true
+      file: "./*.deb"
+      api_key:
+        secure: cg2Wd3MwtRZyc576bWCwJK2ZGy14Amz5TV9zfYtnqZeYTAi/uNwrm1mKGlIprnQNrQrmgDWQ9vdtCBUjRlLUxHlfTEUjVAqMLGPuNq8kgo5H/xF+rRw5YPFrxD4C/+NkDC6hq06C7YX/BKkgUceMZCtI1UNNcDtwPD50+0ZRw1vI9UMRQtSuVUsCwySH7EEdcfZLei6MkIWbrRim1/q+3Lw05UOd9//yAqaS5UlRAh0mpNwBgNuTg+Al5xpeO0P4Q5TVf6x4xw/11FDpz3ufGw10ElRCb4bY54qBN24dkFPD/vITrZ808NMX992GzXxcbspRh+IFs2S/hyqid0XGq+jdTVx7Z/7+uEAfSNxQqufrEDBjvfJEbfVNKkOJkC2UYcL3ay2AHo6UFjbRGuPv2UB8ewLTuP9+Zk4fAFbwyJ7Q0JVylfK8YB10PRYJqx60S8qWu+UgiP10Y7D+u4yYgPJHMHOU8e1Dqkrr7JpZd/rUEYx+cknd5xbSC1uj3jvkcyOpfyoobRst9n+rBBRyXL82cPcR8NY9msaM+lKhMPit19QIhv1NeclA9By2lLeht14fWMQY/NFyzTrhSDcx+v44suMPxkAAZM5L+TuP4944mUn/Hern/friSexVKTzRAa4tGb1BNAMqjOPKXpL6l8MfH6tY/XI91DFTTMPZovw=
+      on:
+          tags: true
