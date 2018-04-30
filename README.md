@@ -68,3 +68,4 @@ make
 # ROADMAP
 
 * [x] Provide alternc account in nss (0.0.1)
+* [x] Support shadow file (0.0.2)
