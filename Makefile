@@ -7,7 +7,7 @@ ifeq ($(strip $(VERSION)),)
 	ifeq ($(strip $(VERSION)),)
 		VERSION="0.0.0"
 	endif
-	ITERATION=`date +'%y%m%d%H%M%S'`
+	ITERATION=$(shell date +'%y%m%d%H%M%S')
 endif
 
 .PHONY: clean package
@@ -24,7 +24,7 @@ package:
 	fpm -s dir -t deb \
 		-n $(NAME) \
 		-v $(VERSION) \
-		--iteration $(ITERATION) \
+		`if [ "$(ITERATION)" ]; then echo "--iteration $(ITERATION)"; fi` \
 		-m alternc@webelys.com \
 		--license GPLv3 \
 		--category admin \
