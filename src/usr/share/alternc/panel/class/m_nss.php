@@ -49,7 +49,7 @@ class m_nss
         $lines=array();
         $lines[]='##ALTERNC ACCOUNTS START##';
         while ($db->next_record()) {
-            $lines[] = $db->f('login').":x:".$db->f('uid').":".$db->f('uid').":::/bin/false";
+            $lines[] = $db->f('login').":x:".$db->f('uid').":".$db->f('uid')."::".getuserpath($db->f('login')).":/bin/false";
         }
         $lines[]='##ALTERNC ACCOUNTS END##';
 
