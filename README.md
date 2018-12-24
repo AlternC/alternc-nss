@@ -69,3 +69,4 @@ make
 
 * [x] Provide alternc account in nss (0.0.1)
 * [x] Support shadow file (0.0.2)
+* [x] Set home directory (0.0.3)
