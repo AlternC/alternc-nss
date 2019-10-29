@@ -124,5 +124,11 @@ class m_nss
 
         return file_put_contents($file, $content, LOCK_EX);
     }
+
+    protected function hook_alternc_add_member()
+    {
+        $this->update_files();
+        return true;
+    }
 }
 
