@@ -59,7 +59,7 @@ apt-get install ruby ruby-dev rubygems build-essential
 gem install --no-ri --no-rdoc fpm
 
 git clone https://github.com/AlternC/alternc-nss
-cd alternc-certbot
+cd alternc-nss
 make
 
 ```
