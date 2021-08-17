@@ -2,7 +2,6 @@ language : bash
 env:
     global:
       - HUB_PROTOCOL=https
-      - GITHUB_REPOSITORY="AlternC/alternc-nss"
       #GITHUB_TOKEN
       - secure: "a3b5PMAhNwRahrvQVPzEeIdjuP06dKdoieuWcjR9tWeJ68o7djhLxscQdAipPbCxipsRXRvR8roYSUEnZYNnIxZ/t7RiLgV6PoCfe7yygZFb6RHJMWKyLuRpChfsi0xK+0zGmq8m/qjUMCZniaprfQdvjRWKVvSwdjCu7t0egSCSbcvbmGO3naqRLiqa67F94L8jT48cv5YQw/s6o3tQZZEOJrgk+zkYX+Lin3fLeuXdH3mJzGfOMoPCuvv7EoqnLoB65PmSSnTvp+O2J1QqeQGgkghwqXoNNH9SUGH/vv+Ct32IErXDMGHgEwySSKRZszFHmZjMbk3FNt4X6aCjy2z4rzos3klDm59mUt0mszHTVenloyNpc/LKIK7Q3yHAaPoYvTFHfNfm0jLOmfkMjSs+ruJqodO9ZO+LAZ4u3ZqviE7dCkMo2ySxkZ/LVL+DAAbKfAT08n8DV4lrc15b+meidHLpkXKeYPSZr+hMznoP8PlEg/V923gg282UyKns4AIHvhxMOJHCKYbHyNeKzm+kVRnBAJYjF/udX0M9VWGd5Otv69tTsU3vLABPzCBjXV0Hg/MooEYQ4nJzI34rs1Fpu9GPmhNS2SLPYIAjhbqtoAsLLveApgfDexSN5V4xq+SMHZtJkrWucIO871oLLe15SPKqq+8p+BYu1VF6nJk="
 branches:
