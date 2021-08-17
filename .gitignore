@@ -1,0 +1,7 @@
+debian/*.debhelper.log
+debian/*.substvars
+debian/alternc*
+debian/files
+debian/.debhelper
+debian/debhelper-build-stamp
+*.gpg
