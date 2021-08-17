@@ -1,0 +1,21 @@
+Source: alternc-nss
+Section: admin
+Priority: optional
+Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
+Build-Depends: debhelper (>= 9),
+               devscripts,
+               git
+Standards-Version: 3.9.8
+
+Package: alternc-nss
+Architecture: all
+Depends: apt-utils, debconf, alternc (>> 3.2.10), libnss-extrausers
+       , debconf
+       , alternc (>= 3.2.10),
+       , libnss-extrausers
+Description: Provide nss account to each AlternC members. Allow
+ AlternC member to act as any Posix user, useful to ssh connection,
+ or to manage php-fpm pool
+ .
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
