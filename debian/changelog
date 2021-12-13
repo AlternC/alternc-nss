@@ -1,3 +1,10 @@
+alternc-nss (0.0.4) stable; urgency=low
+
+  * Use standard debuild packaging system
+  * Use travis service to package all tagged version
+
+ -- Camille Lafitte <alternc@webelys.com>  Mon, 13 Dec 2021 18:41:00 +0200
+
 alternc-nss (0.0.3) stable; urgency=low
 
   * Home directory in passwd file
