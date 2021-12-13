@@ -24,7 +24,7 @@ deploy:
       file_glob: true
       file: "../*.deb"
       api_key:
-          secure: "vHmK+oY8jElO2nYOqMOu+6YFwkXUMvu29dT4J/UKkbwqjNmsByrjAYBkDXRYQ7PKxzyhiWlJQnaS8YCFFT8c91Qt6QAjYHFuPKjOS/VLYGKrzDeJr/tYIMoD752B5UXnkhSe7rDLxgYX0anSnEocFRt0HS/m2zO7B2pDKCl0F4ndcJgnArrSzDlWsJDsPaHuw6PSlmHwXh7xYd2udnOn2QXpogCi/a5e4uKPQfEqVfPLFlVC3oQkQWWKtjpnpN5FT4uy+ugqmp5cCUNMgLCacmuTfrfi7JqiTMLX8x1g6XRjyiFdvfykf1SG3SwMqUeyQw1YhWj5wsSJWRr7jJ2JEKrQ7dZarnELV5KzcdrJn1pmOOUUwJDy8FaEvfbBCST2HLnE1Slg+A1lgmikMD6KMmT+T4TMYQWyHYgiYqf5yJyaMXo66uPAPZRh+6nfWPnWLPiSifsY3Dj+fAFZEFFnpBGzW7CpXGostJIIqhB7eVQ8cuD5atWP9npA06FSwdF6Fw4qiFEzieS1SUhfuM/mnVo7hWJ+IueK6kCYHY31yRrp5HIlP3w8Nv/e8LLXnV/PMQ7qwPR1RvwbTujqxVUvhzPbFIKxhUCDSrFEjaDArOjCPsq5cRJR+wlpIAqKIJbIqUQbBQryws07fVCv3hIhBfROcAfb6btHgXyOb+gqBP0="
+          secure: "MIPNvNTqtGv/SEFLx8rgEWEvD5p6AszU+iVm1+1fu0G3NdJOPhADVJtvpcfqk/fq7s4VnMxQPwkr9na/Q/EFULXAYeRRd6XTa/TImCVP5Ox6ik/gnCfvPHpdyx1JeOd4imO7uvVFVFVwZxeZLJu8Knoz0wlnFafUkPn5aEPgs21HYOa1Wu7GLowoSmxwJyNUSHA8lU4wpK39kZx/T3jLNGEWqHmhIplpHIZL2p0E6OhTUsLhVtA2FjxP1MjusrY6E1QzkeUTJSZ5U1c43e/vjqm4dM4tW+vUGsMmjVB4+fimN4x3rBqYh+GTfiK/UqDlGWuELCW9DoxufFjHWi2wgUNhC2BJsGGhIMhc8cD1dRcMJu4obw/Wg0WmN/CmGNb8iTPsisyRhv5V+90k7vPc9ATOReI9Wd2maVxTp8csBjfHKx2m+i1o+CaDpBcoPkvzp60fjFGdCpgyRhMGv9BRffjmz8EklaJte3KH/O12TedcM5vlsXIatrT2g8aXZ4BC4d0cLoxD1G6babfgrNrrW6M9rHi2tIqX4VycZyIrWAJp6t5W68gFf4fjsNRHCCRyFHOYhtoVFjvEiMEdPvljXjrOq4snFp+r+45zPJ8fM2S11wvfsUuaTJdm2Y6uA336o1T+KvA5TdGpjCxMTaYt/WgDrnqMVyeFXG3zbg2uyEg="
       on:
           tags: true
     - provider: releases
@@ -36,7 +36,7 @@ deploy:
       name: Automatic nightly build by Travis on $(date +'%F %T %Z').
       target_commitish: $TRAVIS_COMMIT
       api_key:
-          secure: "vHmK+oY8jElO2nYOqMOu+6YFwkXUMvu29dT4J/UKkbwqjNmsByrjAYBkDXRYQ7PKxzyhiWlJQnaS8YCFFT8c91Qt6QAjYHFuPKjOS/VLYGKrzDeJr/tYIMoD752B5UXnkhSe7rDLxgYX0anSnEocFRt0HS/m2zO7B2pDKCl0F4ndcJgnArrSzDlWsJDsPaHuw6PSlmHwXh7xYd2udnOn2QXpogCi/a5e4uKPQfEqVfPLFlVC3oQkQWWKtjpnpN5FT4uy+ugqmp5cCUNMgLCacmuTfrfi7JqiTMLX8x1g6XRjyiFdvfykf1SG3SwMqUeyQw1YhWj5wsSJWRr7jJ2JEKrQ7dZarnELV5KzcdrJn1pmOOUUwJDy8FaEvfbBCST2HLnE1Slg+A1lgmikMD6KMmT+T4TMYQWyHYgiYqf5yJyaMXo66uPAPZRh+6nfWPnWLPiSifsY3Dj+fAFZEFFnpBGzW7CpXGostJIIqhB7eVQ8cuD5atWP9npA06FSwdF6Fw4qiFEzieS1SUhfuM/mnVo7hWJ+IueK6kCYHY31yRrp5HIlP3w8Nv/e8LLXnV/PMQ7qwPR1RvwbTujqxVUvhzPbFIKxhUCDSrFEjaDArOjCPsq5cRJR+wlpIAqKIJbIqUQbBQryws07fVCv3hIhBfROcAfb6btHgXyOb+gqBP0="
+          secure: "MIPNvNTqtGv/SEFLx8rgEWEvD5p6AszU+iVm1+1fu0G3NdJOPhADVJtvpcfqk/fq7s4VnMxQPwkr9na/Q/EFULXAYeRRd6XTa/TImCVP5Ox6ik/gnCfvPHpdyx1JeOd4imO7uvVFVFVwZxeZLJu8Knoz0wlnFafUkPn5aEPgs21HYOa1Wu7GLowoSmxwJyNUSHA8lU4wpK39kZx/T3jLNGEWqHmhIplpHIZL2p0E6OhTUsLhVtA2FjxP1MjusrY6E1QzkeUTJSZ5U1c43e/vjqm4dM4tW+vUGsMmjVB4+fimN4x3rBqYh+GTfiK/UqDlGWuELCW9DoxufFjHWi2wgUNhC2BJsGGhIMhc8cD1dRcMJu4obw/Wg0WmN/CmGNb8iTPsisyRhv5V+90k7vPc9ATOReI9Wd2maVxTp8csBjfHKx2m+i1o+CaDpBcoPkvzp60fjFGdCpgyRhMGv9BRffjmz8EklaJte3KH/O12TedcM5vlsXIatrT2g8aXZ4BC4d0cLoxD1G6babfgrNrrW6M9rHi2tIqX4VycZyIrWAJp6t5W68gFf4fjsNRHCCRyFHOYhtoVFjvEiMEdPvljXjrOq4snFp+r+45zPJ8fM2S11wvfsUuaTJdm2Y6uA336o1T+KvA5TdGpjCxMTaYt/WgDrnqMVyeFXG3zbg2uyEg="
       on:
           branch: master
 before_deploy:
