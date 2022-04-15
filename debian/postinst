@@ -7,21 +7,9 @@ set -e
 case "$1" in
 	configure)
 
-		sed -ie '/^passwd:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
-		sed -ie '/^group:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
-		sed -ie '/^shadow:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
-
-		echo -e "\033[31m**********************************************"
-		echo "*                                            *"
-		echo "*   ALTERNC          ACTION REQUESTED        *"
-		echo "*                                            *"
-		echo "* Please :                                   *"
-		echo "*   run alternc.install to fully update      *"
-		echo "*   update your ssl quota from admin panel   *"
-		echo "*                                            *"
-		echo "**********************************************"
-		echo -e "\033[0m"
-
+            # we remove extrausers from alternc-nss original package
+	    sed -ie "s/ extrausers//" /etc/nsswitch.conf
+            
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)
