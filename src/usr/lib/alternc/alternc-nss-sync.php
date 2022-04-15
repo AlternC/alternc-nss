@@ -134,7 +134,16 @@ syslog(LOG_INFO,"Wrote /etc/group");
 
 // ------------------------------------------------------------
 // /ETC/SHADOW
-copy("/etc/shadow","/etc/shadow.bak");
+umask(0037);
+@unlink("/etc/shadow.bak");
+$ss=fopen("/etc/shadow","rb");
+$sd=fopen("/etc/shadow.bak","wb");
+while ($s=fgets($ss,1024)) {
+    fputs($sd,$s);
+}
+fclose($ss);
+fclose($sd);
+
 $f=fopen("/etc/shadow","rb");
 flock($f,LOCK_EX);
 $g=fopen("/etc/shadow.alternc","wb");
