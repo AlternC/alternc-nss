@@ -14,14 +14,26 @@ export DH_VERBOSE=1
 export DEBFULLNAME= Travis Bot
 export DEBEMAIL   = travis-ci@alternc.net
 
-VERSION=$(shell git tag -l --points-at HEAD |grep -v 'nightly')
-ifeq ($(strip $(VERSION)),)
-	VERSION=$(shell git tag | sort -V |grep -v nightly|tail -1)
-	ifeq ($(strip $(VERSION)),)
-		export VERSION="0.0.0"
-	endif
-	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
+VERSION_DEFAULT="0.0.0"
+IS_NIGHTLY=0
+DISTRIBUTION=stable
+
+#Get current version tag
+VERSION_LAST=$(shell git tag -l --points-at HEAD |grep -v 'nightly')
+
+#If not set, find last tag in previous history
+#it's considered as nightly commit
+ifeq ($(strip $(VERSION_LAST)),)
 	IS_NIGHTLY=1
+	VERSION_LAST=$(shell git tag | sort -V |grep -v nightly|tail -1)
+endif
+
+#Set root version
+VERSION := $(if $(VERSION_LAST),$(VERSION_LAST),$(VERSION_DEFAULT))
+
+#Update valude in nightly context
+ifeq ($(strip $(IS_NIGHTLY)),1)
+	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
 	DISTRIBUTION=experimental unstable
 endif
 
