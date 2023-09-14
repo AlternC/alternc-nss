@@ -10,6 +10,10 @@ export DH_VERBOSE=1
 
 #Define version packaging
 #Exclude nighly version
+
+export DEBFULLNAME= Travis Bot
+export DEBEMAIL   = travis-ci@alternc.net
+
 VERSION=$(shell git tag -l --points-at HEAD |grep -v 'nightly')
 ifeq ($(strip $(VERSION)),)
 	VERSION=$(shell git tag | sort -V |grep -v nightly|tail -1)
@@ -18,6 +22,7 @@ ifeq ($(strip $(VERSION)),)
 	endif
 	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
 	IS_NIGHTLY=1
+	DISTRIBUTION=experimental unstable
 endif
 
 clean:
@@ -25,7 +30,7 @@ clean:
 	rm -f debian/files
 	(git rev-parse --git-dir > /dev/null 2>&1 && git checkout debian/changelog) || true
 ifeq ($(strip $(IS_NIGHTLY)),1)
-	(git rev-parse --git-dir > /dev/null 2>&1 && dch -m -b -v $(VERSION) autobuild) || true
+	(git rev-parse --git-dir > /dev/null 2>&1 && echo|dch --distribution "$(DISTRIBUTION)" --force-bad-version --newversion $(VERSION) autobuild) || true
 endif
 %:
 	dh $@
