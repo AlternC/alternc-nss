@@ -34,7 +34,7 @@ VERSION := $(if $(VERSION_LAST),$(VERSION_LAST),$(VERSION_DEFAULT))
 #Update valude in nightly context
 ifeq ($(strip $(IS_NIGHTLY)),1)
 	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
-	DISTRIBUTION=experimental unstable
+	DISTRIBUTION=experimental unstable testing
 endif
 
 clean:
