@@ -5,6 +5,9 @@
 # This version is for a multibinary package. It also allows you to build any
 # of the binary packages independantly, via binary-<package> targets.
 
+# We use 4 spaces for 1 tab
+# Took attention between these two formatting
+
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
@@ -41,8 +44,8 @@ clean:
 	dh clean
 	rm -f debian/files
 	(git rev-parse --git-dir > /dev/null 2>&1 && git checkout debian/changelog) || true
-ifeq ($(strip $(IS_NIGHTLY)),1)
-	(git rev-parse --git-dir > /dev/null 2>&1 && echo|dch --distribution "$(DISTRIBUTION)" --force-bad-version --newversion $(VERSION) autobuild) || true
-endif
+    ifeq ($(strip $(IS_NIGHTLY)),1)
+		(git rev-parse --git-dir > /dev/null 2>&1 && echo|dch --distribution "$(DISTRIBUTION)" --force-bad-version --newversion $(VERSION) autobuild) || true
+    endif
 %:
 	dh $@
