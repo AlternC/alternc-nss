@@ -43,8 +43,10 @@ ifeq ($(strip $(IS_NIGHTLY)),1)
         VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
         DISTRIBUTION=experimental unstable testing
         $(file >$(VARIABLES_FILE))
+        $(file >>$(VARIABLES_FILE),IS_NIGHTLY:=$(IS_NIGHTLY))
         $(file >>$(VARIABLES_FILE),VERSION:=$(VERSION))
         $(file >>$(VARIABLES_FILE),DISTRIBUTION:=$(DISTRIBUTION))
+        $(file >>$(VARIABLES_FILE),TO_DELETE=1)
     endif
 endif
 
@@ -54,6 +56,11 @@ clean:
 	(git rev-parse --git-dir > /dev/null 2>&1 && git checkout debian/changelog) || true
     ifeq ($(strip $(IS_NIGHTLY)),1)
 		(git rev-parse --git-dir > /dev/null 2>&1 && echo|dch --distribution "$(DISTRIBUTION)" --force-bad-version --newversion $(VERSION) autobuild) || true
+    endif
+binary:
+	dh binary
+    ifeq ($(strip $(TO_DELETE)),1)
+		rm $(VARIABLES_FILE)
     endif
 %:
 	dh $@
