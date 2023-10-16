@@ -1,9 +1,3 @@
-alternc-nss-sync (0.0.4) UNRELEASED; urgency=medium
-
-  * autobuild
-
- -- Benjamin Sonntag <benjamin@octopuce.fr>  Wed, 13 Apr 2022 14:21:39 +0200
-
 alternc-nss-sync (0.0.4) stable; urgency=low
 
   * use a shell script to sync accounts instead of the NSS module libnss-extrausers
