@@ -20,6 +20,7 @@ export DEBEMAIL   = travis-ci@alternc.net
 VERSION_DEFAULT="0.0.0"
 IS_NIGHTLY=0
 DISTRIBUTION=stable
+VARIABLES_FILE=variables.txt
 
 #Get current version tag
 VERSION_LAST=$(shell git tag -l --points-at HEAD |grep -v 'nightly')
@@ -36,8 +37,15 @@ VERSION := $(if $(VERSION_LAST),$(VERSION_LAST),$(VERSION_DEFAULT))
 
 #Update valude in nightly context
 ifeq ($(strip $(IS_NIGHTLY)),1)
-	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
-	DISTRIBUTION=experimental unstable testing
+    ifneq ("$(wildcard $(VARIABLES_FILE))","")
+        include ./$(VARIABLES_FILE)
+    else
+        VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
+        DISTRIBUTION=experimental unstable testing
+        $(file >$(VARIABLES_FILE))
+        $(file >>$(VARIABLES_FILE),VERSION:=$(VERSION))
+        $(file >>$(VARIABLES_FILE),DISTRIBUTION:=$(DISTRIBUTION))
+    endif
 endif
 
 clean:
