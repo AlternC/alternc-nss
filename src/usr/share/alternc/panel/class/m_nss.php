@@ -101,8 +101,8 @@ class m_nss
         $content = implode("\n",$content_lines);
         $content_bck = implode("\n",$this->group);
 
-        file_put_contents($file_bck,$content_bck);
-        return file_put_contents($file, $content, LOCK_EX);
+        $this->write_file($file_bck,$content_bck);
+        return $this->write_file($file, $content);
     }
 
     protected function update_passwd_file()
@@ -122,8 +122,8 @@ class m_nss
         $content = implode("\n",$content_lines);
         $content_bck = implode("\n",$this->passwd);
 
-        file_put_contents($file_bck,$content_bck);
-        return file_put_contents($file, $content, LOCK_EX);
+        $this->write_file($file_bck,$content_bck);
+        return $this->write_file($file, $content);
     }
 
     protected function update_shadow_file()
@@ -143,7 +143,15 @@ class m_nss
         $content = implode("\n",$content_lines);
         $content_bck = implode("\n",$this->shadow);
 
-        file_put_contents($file_bck,$content_bck);
+        $this->write_file($file_bck,$content_bck);
+        return $this->write_file($file, $content);
+    }
+
+    protected function write_file($file,$content,$separator = "\n") {
+
+        if (is_array($content)) {
+            $content = implode($separator,$content);
+        }
         return file_put_contents($file, $content, LOCK_EX);
     }
 
