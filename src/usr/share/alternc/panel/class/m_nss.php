@@ -5,9 +5,10 @@
  */
 class m_nss
 {
-    protected $group;
-    protected $passwd;
-    protected $shadow;
+    protected $group = array();
+    protected $passwd = array();
+    protected $shadow = array();
+
     /** Hook function called when a user is created
      * This function add acccount to nss file
      * globals $cuid is the appropriate user
