@@ -87,21 +87,36 @@ class m_nss
     protected function update_group_file()
     {
         $file = "/var/lib/extrausers/group";
-        $content = $this->group_file;
+        $file_bck = "/var/lib/alternc/backups/group";
+        if (!file_exists($file_bck)) {
+            $content = file_get_contents($file);
+            $content .= $this->group_file;
+        }
+        file_put_contents($file_bck,$this->group_file);
         return file_put_contents($file, $content, LOCK_EX);
     }
 
     protected function update_passwd_file()
     {
         $file = "/var/lib/extrausers/passwd";
-        $content = $this->passwd_file;
+        $file_bck = "/var/lib/alternc/backups/passwd";
+        if (!file_exists($file_bck)) {
+            $content = file_get_contents($file);
+            $content .= $this->passwd_file;
+        }
+        file_put_contents($file_bck,$this->passwd_file);
         return file_put_contents($file, $content, LOCK_EX);
     }
 
     protected function update_shadow_file()
     {
         $file = "/var/lib/extrausers/shadow";
-        $content = $this->shadow_file;
+        $file_bck = "/var/lib/alternc/backups/shadow";
+        if (!file_exists($file_bck)) {
+            $content = file_get_contents($file);
+            $content .= $this->shadow_file;
+        }
+        file_put_contents($file_bck,$this->shadow_file);
         return file_put_contents($file, $content, LOCK_EX);
     }
 
