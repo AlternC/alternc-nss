@@ -9,6 +9,9 @@ class m_nss
     protected $passwd = array();
     protected $shadow = array();
 
+    protected $dir_backup = "/var/lib/alternc/backups/";
+    protected $dir_extrausers = "/var/lib/extrausers/";
+
     /** Hook function called when a user is created
      * This function add acccount to nss file
      * globals $cuid is the appropriate user
@@ -87,8 +90,8 @@ class m_nss
 
     protected function update_group_file()
     {
-        $file = "/var/lib/extrausers/group";
-        $file_bck = "/var/lib/alternc/backups/group";
+        $file = $this->dir_extrausers."group";
+        $file_bck = $this->dir_backup."group";
         $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         if (!$content_lines) {
@@ -108,8 +111,8 @@ class m_nss
 
     protected function update_passwd_file()
     {
-        $file = "/var/lib/extrausers/passwd";
-        $file_bck = "/var/lib/alternc/backups/passwd";
+        $file = $this->dir_extrausers."passwd";
+        $file_bck = $this->dir_backup."passwd";
         $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         if (!$content_lines) {
@@ -129,8 +132,8 @@ class m_nss
 
     protected function update_shadow_file()
     {
-        $file = "/var/lib/extrausers/shadow";
-        $file_bck = "/var/lib/alternc/backups/shadow";
+        $file = $this->dir_extrausers."shadow";
+        $file_bck = $this->dir_backup."shadow";
         $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         if (!$content_lines) {
