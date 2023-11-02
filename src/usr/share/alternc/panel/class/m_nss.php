@@ -79,19 +79,8 @@ class m_nss
         $this->shadow = $lines;
     }
 
-    public function update_files()
+    protected function write_content($file, $file_bck, $content_new)
     {
-        $this->define_files();
-        $this->update_group_file();
-        $this->update_passwd_file();
-        $this->update_shadow_file();
-    }
-
-
-    protected function update_group_file()
-    {
-        $file = $this->dir_extrausers . "group";
-        $file_bck = $this->dir_backup . "group";
         $content_lines = false;
         if (file_exists($file)) {
             $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -104,60 +93,43 @@ class m_nss
             $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines, $content_lines_bck);
         }
-        $content_lines = array_merge($content_lines, $this->group);
+        $content_lines = array_merge($content_lines, $content_new);
         $content = implode("\n", $content_lines);
         $content_bck = implode("\n", $this->group);
 
-        $this->write_file($file_bck, $content_bck);
-        return $this->write_file($file, $content);
+        return $this->write_file($file_bck, $content_bck) && $this->write_file($file, $content);
+    }
+
+    public function update_files()
+    {
+        $this->define_files();
+        $this->update_group_file();
+        $this->update_passwd_file();
+        $this->update_shadow_file();
+    }
+
+    protected function update_group_file()
+    {
+        $file = $this->dir_extrausers . "group";
+        $file_bck = $this->dir_backup . "group";
+
+        return $this->write_content($file, $file_bck, $this->group);
     }
 
     protected function update_passwd_file()
     {
         $file = $this->dir_extrausers . "passwd";
         $file_bck = $this->dir_backup . "passwd";
-        $content_lines = false;
-        if (file_exists($file)) {
-            $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        }
 
-        if (!$content_lines) {
-            $content_lines = array();
-        }
-        if (file_exists($file_bck)) {
-            $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            $content_lines = array_diff($content_lines, $content_lines_bck);
-        }
-        $content_lines = array_merge($content_lines, $this->passwd);
-        $content = implode("\n", $content_lines);
-        $content_bck = implode("\n", $this->passwd);
-
-        $this->write_file($file_bck, $content_bck);
-        return $this->write_file($file, $content);
+        return $this->write_content($file, $file_bck, $this->passwd);
     }
 
     protected function update_shadow_file()
     {
         $file = $this->dir_extrausers . "shadow";
         $file_bck = $this->dir_backup . "shadow";
-        $content_lines = false;
-        if (file_exists($file)) {
-            $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        }
 
-        if (!$content_lines) {
-            $content_lines = array();
-        }
-        if (file_exists($file_bck)) {
-            $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            $content_lines = array_diff($content_lines, $content_lines_bck);
-        }
-        $content_lines = array_merge($content_lines, $this->shadow);
-        $content = implode("\n", $content_lines);
-        $content_bck = implode("\n", $this->shadow);
-
-        $this->write_file($file_bck, $content_bck);
-        return $this->write_file($file, $content);
+        return $this->write_content($file, $file_bck, $this->shadow);
     }
 
     protected function write_file($file, $content, $separator = "\n")
