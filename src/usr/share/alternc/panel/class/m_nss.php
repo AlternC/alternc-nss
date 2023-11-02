@@ -92,7 +92,10 @@ class m_nss
     {
         $file = $this->dir_extrausers."group";
         $file_bck = $this->dir_backup."group";
-        $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $content_lines = false;
+        if (file_exists($file)) {
+            $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        }
 
         if (!$content_lines) {
             $content_lines=[];
@@ -113,7 +116,10 @@ class m_nss
     {
         $file = $this->dir_extrausers."passwd";
         $file_bck = $this->dir_backup."passwd";
-        $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $content_lines = false;
+        if (file_exists($file)) {
+            $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        }
 
         if (!$content_lines) {
             $content_lines = array();
@@ -134,7 +140,10 @@ class m_nss
     {
         $file = $this->dir_extrausers."shadow";
         $file_bck = $this->dir_backup."shadow";
-        $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $content_lines = false;
+        if (file_exists($file)) {
+            $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        }
 
         if (!$content_lines) {
             $content_lines = array();
