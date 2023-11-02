@@ -5,9 +5,9 @@
  */
 class m_nss
 {
-    protected $group_file;
-    protected $passwd_file;
-    protected $shadow_file;
+    protected $group;
+    protected $passwd;
+    protected $shadow;
     /** Hook function called when a user is created
      * This function add acccount to nss file
      * globals $cuid is the appropriate user
@@ -37,7 +37,7 @@ class m_nss
             $lines[] = $db->f('login').":x:".$db->f('uid').":";
         }
 
-        $this->group_file = implode("\n", $lines);
+        $this->group = $lines;
     }
 
     protected function define_passwd_file()
@@ -49,7 +49,7 @@ class m_nss
             $lines[] = $db->f('login').":x:".$db->f('uid').":".$db->f('uid')."::".getuserpath($db->f('login')).":/bin/false";
         }
 
-        $this->passwd_file = implode("\n", $lines);
+        $this->passwd = $lines;
     }
 
     protected function define_shadow_file()
@@ -72,7 +72,7 @@ class m_nss
             $lines[] = implode(':', $fields);
         }
 
-        $this->shadow_file = implode("\n", $lines);
+        $this->shadow = $lines;
     }
 
     public function update_files()
@@ -88,19 +88,20 @@ class m_nss
     {
         $file = "/var/lib/extrausers/group";
         $file_bck = "/var/lib/alternc/backups/group";
-        $content = "";
-
         $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
         if (!$content_lines) {
             $content_lines=[];
         }
         if (file_exists($file_bck)) {
             $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines,$content_lines_bck);
-            $content = implode("\n", $content_lines);
         }
-        $content .= $this->group_file;
-        file_put_contents($file_bck,$this->group_file);
+        $content_lines = array_merge($content_lines,$this->group);
+        $content = implode("\n",$content_lines);
+        $content_bck = implode("\n",$this->group);
+
+        file_put_contents($file_bck,$content_bck);
         return file_put_contents($file, $content, LOCK_EX);
     }
 
@@ -108,19 +109,20 @@ class m_nss
     {
         $file = "/var/lib/extrausers/passwd";
         $file_bck = "/var/lib/alternc/backups/passwd";
-        $content = "";
-
         $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
         if (!$content_lines) {
-            $content_lines=[];
+            $content_lines = array();
         }
         if (file_exists($file_bck)) {
             $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines,$content_lines_bck);
-            $content = implode("\n", $content_lines);
         }
-        $content .= $this->passwd_file;
-        file_put_contents($file_bck,$this->passwd_file);
+        $content_lines = array_merge($content_lines,$this->passwd);
+        $content = implode("\n",$content_lines);
+        $content_bck = implode("\n",$this->passwd);
+
+        file_put_contents($file_bck,$content_bck);
         return file_put_contents($file, $content, LOCK_EX);
     }
 
@@ -128,19 +130,20 @@ class m_nss
     {
         $file = "/var/lib/extrausers/shadow";
         $file_bck = "/var/lib/alternc/backups/shadow";
-        $content = "";
-
         $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
         if (!$content_lines) {
-            $content_lines=[];
+            $content_lines = array();
         }
         if (file_exists($file_bck)) {
             $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines,$content_lines_bck);
-            $content = implode("\n", $content_lines);
         }
-        $content .= $this->shadow_file;
-        file_put_contents($file_bck,$this->shadow_file);
+        $content_lines = array_merge($content_lines,$this->shadow);
+        $content = implode("\n",$content_lines);
+        $content_bck = implode("\n",$this->shadow);
+
+        file_put_contents($file_bck,$content_bck);
         return file_put_contents($file, $content, LOCK_EX);
     }
 
