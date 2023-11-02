@@ -88,10 +88,18 @@ class m_nss
     {
         $file = "/var/lib/extrausers/group";
         $file_bck = "/var/lib/alternc/backups/group";
-        if (!file_exists($file_bck)) {
-            $content = file_get_contents($file);
-            $content .= $this->group_file;
+        $content = "";
+
+        $content_lines = file($file);
+        if (!$content_lines) {
+            $content_lines=[];
         }
+        if (file_exists($file_bck)) {
+            $content_lines_bck = file($file_bck);
+            $content_lines = array_diff($content_lines,$content_lines_bck);
+            $content = implode("\n", $content_lines);
+        }
+        $content .= $this->group_file;
         file_put_contents($file_bck,$this->group_file);
         return file_put_contents($file, $content, LOCK_EX);
     }
@@ -100,10 +108,18 @@ class m_nss
     {
         $file = "/var/lib/extrausers/passwd";
         $file_bck = "/var/lib/alternc/backups/passwd";
-        if (!file_exists($file_bck)) {
-            $content = file_get_contents($file);
-            $content .= $this->passwd_file;
+        $content = "";
+
+        $content_lines = file($file);
+        if (!$content_lines) {
+            $content_lines=[];
         }
+        if (file_exists($file_bck)) {
+            $content_lines_bck = file($file_bck);
+            $content_lines = array_diff($content_lines,$content_lines_bck);
+            $content = implode("\n", $content_lines);
+        }
+        $content .= $this->passwd_file;
         file_put_contents($file_bck,$this->passwd_file);
         return file_put_contents($file, $content, LOCK_EX);
     }
@@ -112,10 +128,18 @@ class m_nss
     {
         $file = "/var/lib/extrausers/shadow";
         $file_bck = "/var/lib/alternc/backups/shadow";
-        if (!file_exists($file_bck)) {
-            $content = file_get_contents($file);
-            $content .= $this->shadow_file;
+        $content = "";
+
+        $content_lines = file($file);
+        if (!$content_lines) {
+            $content_lines=[];
         }
+        if (file_exists($file_bck)) {
+            $content_lines_bck = file($file_bck);
+            $content_lines = array_diff($content_lines,$content_lines_bck);
+            $content = implode("\n", $content_lines);
+        }
+        $content .= $this->shadow_file;
         file_put_contents($file_bck,$this->shadow_file);
         return file_put_contents($file, $content, LOCK_EX);
     }
