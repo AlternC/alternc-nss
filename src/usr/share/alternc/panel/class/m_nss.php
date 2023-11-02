@@ -90,12 +90,12 @@ class m_nss
         $file_bck = "/var/lib/alternc/backups/group";
         $content = "";
 
-        $content_lines = file($file);
+        $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         if (!$content_lines) {
             $content_lines=[];
         }
         if (file_exists($file_bck)) {
-            $content_lines_bck = file($file_bck);
+            $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines,$content_lines_bck);
             $content = implode("\n", $content_lines);
         }
@@ -110,12 +110,12 @@ class m_nss
         $file_bck = "/var/lib/alternc/backups/passwd";
         $content = "";
 
-        $content_lines = file($file);
+        $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         if (!$content_lines) {
             $content_lines=[];
         }
         if (file_exists($file_bck)) {
-            $content_lines_bck = file($file_bck);
+            $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines,$content_lines_bck);
             $content = implode("\n", $content_lines);
         }
@@ -130,12 +130,12 @@ class m_nss
         $file_bck = "/var/lib/alternc/backups/shadow";
         $content = "";
 
-        $content_lines = file($file);
+        $content_lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         if (!$content_lines) {
             $content_lines=[];
         }
         if (file_exists($file_bck)) {
-            $content_lines_bck = file($file_bck);
+            $content_lines_bck = file($file_bck, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $content_lines = array_diff($content_lines,$content_lines_bck);
             $content = implode("\n", $content_lines);
         }
