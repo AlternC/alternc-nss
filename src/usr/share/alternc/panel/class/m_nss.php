@@ -97,6 +97,9 @@ class m_nss
         $content = implode("\n", $content_lines);
         $content_bck = implode("\n", $content_new);
 
+        //Provide a final return carrier
+        $content .= "\n";
+
         return $this->write_file($file_bck, $content_bck) && $this->write_file($file, $content);
     }
 
