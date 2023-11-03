@@ -95,7 +95,7 @@ class m_nss
         }
         $content_lines = array_merge($content_lines, $content_new);
         $content = implode("\n", $content_lines);
-        $content_bck = implode("\n", $this->group);
+        $content_bck = implode("\n", $content_new);
 
         return $this->write_file($file_bck, $content_bck) && $this->write_file($file, $content);
     }
