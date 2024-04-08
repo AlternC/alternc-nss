@@ -8,62 +8,48 @@ This alternc plugin provide NSS support about alternc account. Purpose is to pro
 # Requirement
 
 You need :
-* debian server (from wheezy to Stretch)
+* debian server
 * alternc >= 3.2
-* [apt-transport-https](https://packages.debian.org/search?keywords=apt-transport-https) package to use https bintray service.
 
 
-# Installation
+# Get the package #
 
-## Stable package
+## Build own package ##
 
-You can download last package from :
-* github : [release page](../../releases/latest)
-* bintray : [ ![Bintray](https://api.bintray.com/packages/alternc/stable/alternc-nss/images/download.svg) ](https://bintray.com/alternc/stable/alternc-nss/_latestVersion)
-* from bintray repository
+You can compile this package with:
 
-### With Wheezy, Jessie, Stretch
-
-```shell
-apt-get install apt-transport-https
-echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
-apt-get install alternc-nss
-alternc.install
+```
+    apt install build-essential debhelper git
+    git clone https://github.com/AlternC/alternc-php-fpm
+    cd alternc-php-fpm
+    dpkg-buildpackage -us -uc
 ```
 
-## Nightly package
+## From GitHub ##
 
-You can get last package from bintray, it's follow git master branch
+You can obtain nightly and last stable package from the dedicated page : [releases page](https://github.com/AlternC/alternc-nss/releases)
 
-```shell
-echo "deb [trusted=yes] https://dl.bintray.com/alternc/nightly stable main"  >> /etc/apt/sources.list.d/alternc.list
-apt-get update
-apt-get upgrade
-apt-get install alternc-nss
-alternc.install
+## From our repository ##
+
+Our stable repository is avalaible at https://debian.alternc.org
+
+```
+echo "deb http://debian.alternc.org/ $(lsb_release -cs) main" >> /etc/apt/sources.list.d/alternc.list
+wget https://debian.alternc.org/key.txt -O - | apt-key add -
+apt update
 ```
 
 # Configuration and Activation
 
-Once alternc-nss installed , you must :
+Once alternc-nss installed, you must :
 * run **alternc.install**
 
 You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domains hosted.
 
-# Packaging from source
 
-To generate package we use [fpm tool](https://github.com/jordansissel/fpm)
+# Alternative
 
-```shell
-apt-get install ruby ruby-dev rubygems build-essential
-gem install --no-ri --no-rdoc fpm
-
-git clone https://github.com/AlternC/alternc-nss
-cd alternc-nss
-make
-
-```
-
+We provide also another package **alternc-nss-sync** wich provide alternc-nss service. In this case user account are set in defaul files. Packages are available also in GitHub release and our repository.
 
 # ROADMAP
 
