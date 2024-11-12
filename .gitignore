@@ -4,4 +4,5 @@ debian/alternc*
 debian/files
 debian/.debhelper
 debian/debhelper-build-stamp
+debian/source
 *.gpg
