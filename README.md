@@ -20,7 +20,7 @@ You can compile this package with:
 
 ```
     apt install build-essential debhelper git
-    git clone https://github.com/AlternC/alternc-php-fpm
+    git clone https://github.com/AlternC/alternc-nss
     cd alternc-php-fpm
     dpkg-buildpackage -us -uc
 ```
@@ -44,15 +44,32 @@ apt update
 Once alternc-nss installed, you must :
 * run **alternc.install**
 
-You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domains hosted.
+You can run also **/usr/lib/alternc/install.d/alternc-nss end** to generate and update all AlternC accounts.
 
 
 # Alternative
 
 We provide also another package **alternc-nss-sync** wich provide alternc-nss service. In this case user account are set in defaul files. Packages are available also in GitHub release and our repository.
 
-# ROADMAP
+# CHANGELOG / ROADMAP
 
-* [x] Provide alternc account in nss (0.0.1)
-* [x] Support shadow file (0.0.2)
-* [x] Set home directory (0.0.3)
+## TODO
+ * Provide a template to each nss file
+ * Personnalize shell access
+ * Set subaccount (split account to isolate php pool to each AlternC account)
+ * Define a prefix to prevent conflict with server account
+ * All others requests at https://github.com/AlternC/alternc-nss/issues
+
+## Changelog
+
+* 0.0.1
+  * Provide alternc account in nss
+* 0.0.2
+  * Support shadow file
+* 0.0.3
+  * Set home directory
+* 0.0.4
+  * Use debuilder service
+  * Package is now avalaible from https://debian.alternc.org repository
+* 0.1.0
+  * Prevent OOM with ```#``` in file (naive solution to #10)
