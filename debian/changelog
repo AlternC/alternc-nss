@@ -1,3 +1,10 @@
+alternc-nss (0.1.0) buster bullseye ookworm; urgency=low
+
+  * Provide package to all relase since buster
+  * Provide a naive approach to prevent OOM #10
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 12 Nov 2024 16:50:00 +0100
+
 alternc-nss (0.0.4) stable; urgency=low
 
   * Use standard debuild packaging system
