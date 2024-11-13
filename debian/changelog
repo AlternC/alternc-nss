@@ -1,4 +1,11 @@
-alternc-nss (0.1.0) buster bullseye ookworm; urgency=low
+alternc-nss (0.1.1) buster bullseye bookworm; urgency=low
+
+  * Fix shebang call, don't forget argument
+  * Fix PHP warning, prevent some alert about unset variable
+
+ -- Camille Lafitte <alternc@webelys.com>  Wed, 13 Nov 2024 10:20:00 +0100
+
+alternc-nss (0.1.0) buster bullseye bookworm; urgency=low
 
   * Provide package to all relase since buster
   * Provide a naive approach to prevent OOM #10
