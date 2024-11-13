@@ -88,21 +88,21 @@ class m_nss
     {
         $file = "/var/lib/extrausers/group";
         $content = $this->group_file;
-        return file_put_contents($file, $content, LOCK_EX);
+        return file_put_contents($file, $content."\n", LOCK_EX);
     }
 
     protected function update_passwd_file()
     {
         $file = "/var/lib/extrausers/passwd";
         $content = $this->passwd_file;
-        return file_put_contents($file, $content, LOCK_EX);
+        return file_put_contents($file, $content."\n", LOCK_EX);
     }
 
     protected function update_shadow_file()
     {
         $file = "/var/lib/extrausers/shadow";
         $content = $this->shadow_file;
-        return file_put_contents($file, $content, LOCK_EX);
+        return file_put_contents($file, $content."\n", LOCK_EX);
     }
 
     protected function hook_alternc_add_member()
