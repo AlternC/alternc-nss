@@ -87,24 +87,21 @@ class m_nss
     protected function update_group_file()
     {
         $file = "/var/lib/extrausers/group";
-        // $content = file_get_contents($file);
-        $content .= $this->group_file;
+        $content = $this->group_file;
         return file_put_contents($file, $content, LOCK_EX);
     }
 
     protected function update_passwd_file()
     {
         $file = "/var/lib/extrausers/passwd";
-        // $content = file_get_contents($file);
-        $content .= $this->passwd_file;
+        $content = $this->passwd_file;
         return file_put_contents($file, $content, LOCK_EX);
     }
 
     protected function update_shadow_file()
     {
         $file = "/var/lib/extrausers/shadow";
-        // $content = file_get_contents($file);
-        $content .= $this->shadow_file;
+        $content = $this->shadow_file;
         return file_put_contents($file, $content, LOCK_EX);
     }
 
