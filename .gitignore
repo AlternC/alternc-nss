@@ -6,3 +6,4 @@ debian/.debhelper
 debian/debhelper-build-stamp
 debian/source
 *.gpg
+vendor/*
