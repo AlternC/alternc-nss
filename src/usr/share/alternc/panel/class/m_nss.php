@@ -32,9 +32,9 @@ class m_nss
     {
         global $db;
         $db->query("SELECT login,uid FROM `membres`");
-        $lines=array();
+        $lines = [];
         while ($db->next_record()) {
-            $lines[] = $db->f('login').":x:".$db->f('uid').":";
+            $lines[] = $db->f('login') . ":x:" . $db->f('uid') . ":";
         }
 
         $this->group_file = implode("\n", $lines);
@@ -44,9 +44,9 @@ class m_nss
     {
         global $db;
         $db->query("SELECT login,uid FROM `membres`");
-        $lines=array();
+        $lines = [];
         while ($db->next_record()) {
-            $lines[] = $db->f('login').":x:".$db->f('uid').":".$db->f('uid')."::".getuserpath($db->f('login')).":/bin/false";
+            $lines[] = $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":/bin/false";
         }
 
         $this->passwd_file = implode("\n", $lines);
@@ -56,19 +56,19 @@ class m_nss
     {
         global $db;
         $db->query("SELECT login FROM `membres`");
-        $lines=array();
+        $lines = [];
         while ($db->next_record()) {
-	    // shadow fields (9) :
-	    // 1. login
-	    // 2. encrypted password or * to prevent login
-	    // 3. date of last password change or '' meaning that password aging features are disabled
-	    // 4. minimum password age or '' or 0 meaning no minimum age
-	    // 5. maximum password age or '' meaning no maximum password age, no password warning period, and no password inactivity period
-	    // 6. password warning period or '' or 0 meaning there are no password warning period
-	    // 7. password inactivity period or '' for no enforcement
-	    // 8. account expiration date or '' for no expiration
-	    // 9. reserved
-	    $fields = array($db->f('login'), '*', '', '', '', '', '', '', '');
+            // shadow fields (9) :
+            // 1. login
+            // 2. encrypted password or * to prevent login
+            // 3. date of last password change or '' meaning that password aging features are disabled
+            // 4. minimum password age or '' or 0 meaning no minimum age
+            // 5. maximum password age or '' meaning no maximum password age, no password warning period, and no password inactivity period
+            // 6. password warning period or '' or 0 meaning there are no password warning period
+            // 7. password inactivity period or '' for no enforcement
+            // 8. account expiration date or '' for no expiration
+            // 9. reserved
+            $fields = [$db->f('login'), '*', '', '', '', '', '', '', ''];
             $lines[] = implode(':', $fields);
         }
 
@@ -88,21 +88,21 @@ class m_nss
     {
         $file = "/var/lib/extrausers/group";
         $content = $this->group_file;
-        return file_put_contents($file, $content."\n", LOCK_EX);
+        return file_put_contents($file, $content . "\n", LOCK_EX);
     }
 
     protected function update_passwd_file()
     {
         $file = "/var/lib/extrausers/passwd";
         $content = $this->passwd_file;
-        return file_put_contents($file, $content."\n", LOCK_EX);
+        return file_put_contents($file, $content . "\n", LOCK_EX);
     }
 
     protected function update_shadow_file()
     {
         $file = "/var/lib/extrausers/shadow";
         $content = $this->shadow_file;
-        return file_put_contents($file, $content."\n", LOCK_EX);
+        return file_put_contents($file, $content . "\n", LOCK_EX);
     }
 
     protected function hook_alternc_add_member()
@@ -111,4 +111,3 @@ class m_nss
         return true;
     }
 }
-
