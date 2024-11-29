@@ -1,3 +1,10 @@
+alternc-nss (0.1.2) buster bullseye bookworm; urgency=low
+
+  * Apply PER CS conformoty (some PSR)
+  * Add a final return carriage to allow last account parsing
+
+ -- Camille Lafitte <alternc@webelys.com>  Wed,29 Nov 2024 14:19:00 +0100
+
 alternc-nss (0.1.1) buster bullseye bookworm; urgency=low
 
   * Fix shebang call, don't forget argument
