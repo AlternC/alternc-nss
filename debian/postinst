@@ -4,12 +4,20 @@
 
 set -e
 
+CONFIGFILE="/etc/alternc/local.sh"
+
 case "$1" in
 	configure)
 
 		sed -ie '/^passwd:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
 		sed -ie '/^group:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
 		sed -ie '/^shadow:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
+
+		# Set default login shell
+		grep -Eq "^ *LOGIN_SHELL=" $CONFIGFILE || echo "
+# Set a login shell to use by default
+# default is /bin/false
+LOGIN_SHELL=/bin/false" >> $CONFIGFILE
 
 		echo -e "\033[31m**********************************************"
 		echo "*                                            *"
