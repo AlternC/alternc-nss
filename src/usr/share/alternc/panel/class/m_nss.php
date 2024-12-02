@@ -8,7 +8,13 @@ class m_nss
     protected $group_file;
     protected $passwd_file;
     protected $shadow_file;
-    protected $login_shell_default = "/bin/false";
+    protected $login_shell_default;
+
+    public function __construct()
+    {
+        $this->login_shell_default = !empty($GLOBALS['L_LOGIN_SHELL']) ? $GLOBALS['L_LOGIN_SHELL'] : "/bin/false";
+    }
+
 
     /** Hook function called when a user is created
      * This function add acccount to nss file
@@ -46,7 +52,7 @@ class m_nss
     {
         global $db;
 
-        $login_shell = variable_get('nss_login_shell', $this->login_shell_default, 'Set default login shell, false by default');
+        $login_shell = variable_get('nss_login_shell', '', 'Set default login shell, false by default');
 
         if (!file_exists($login_shell)) {
             $login_shell = $this->login_shell_default;
