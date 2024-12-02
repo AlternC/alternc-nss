@@ -48,6 +48,10 @@ class m_nss
 
         $login_shell = variable_get('nss_login_shell', $this->login_shell_default, 'Set default login shell, false by default');
 
+        if (!file_exists($login_shell)) {
+            $login_shell = $this->login_shell_default;
+        }
+
         $db->query("SELECT login,uid FROM `membres`");
         $lines = [];
         while ($db->next_record()) {
