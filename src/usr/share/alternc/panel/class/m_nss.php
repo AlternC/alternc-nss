@@ -8,6 +8,8 @@ class m_nss
     protected $group_file;
     protected $passwd_file;
     protected $shadow_file;
+    protected $login_shell_default = "/bin/false";
+
     /** Hook function called when a user is created
      * This function add acccount to nss file
      * globals $cuid is the appropriate user
@@ -43,10 +45,13 @@ class m_nss
     protected function define_passwd_file()
     {
         global $db;
+
+        $login_shell = variable_get('nss_login_shell', $this->login_shell_default, 'Set default login shell, false by default');
+
         $db->query("SELECT login,uid FROM `membres`");
         $lines = [];
         while ($db->next_record()) {
-            $lines[] = $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":/bin/false";
+            $lines[] = $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":" . $login_shell;
         }
 
         $this->passwd_file = implode("\n", $lines);
