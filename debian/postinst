@@ -19,6 +19,11 @@ case "$1" in
 				LOGIN_SHELL="${RET}"
 		fi
 
+		db_get alternc-nss/login_prefix
+		if [ -n "${RET}" ]; then
+				LOGIN_PREFIX="${RET}"
+		fi
+
 		sed -ie '/^passwd:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
 		sed -ie '/^group:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
 		sed -ie '/^shadow:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
