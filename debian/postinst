@@ -9,6 +9,7 @@ set -e
 
 CONFIGFILE="/etc/alternc/local.sh"
 LOGIN_SHELL="/bin/false"
+LOGIN_PREFIX=""
 
 case "$1" in
 	configure)
@@ -30,6 +31,15 @@ LOGIN_SHELL=" >> $CONFIGFILE
 
 		# Update/Set login shell variable
 	    sed -i -e "s#^ *LOGIN_SHELL=.*#LOGIN_SHELL=\"$LOGIN_SHELL\"#" $CONFIGFILE
+
+		# Enable login prefix variable
+		grep -Eq "^ *LOGIN_PREFIX=" $CONFIGFILE || echo "
+#Default login prefix to use
+#default is empty
+LOGIN_PREFIX=" >> $CONFIGFILE
+
+		# Update/Set login prefix variable
+	    sed -i -e "s#^ *LOGIN_PREFIX=.*#LOGIN_PREFIX=\"$LOGIN_PREFIX\"#" $CONFIGFILE
 
 		echo -e "\033[31m**********************************************"
 		echo "*                                            *"
