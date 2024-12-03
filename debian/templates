@@ -1,0 +1,7 @@
+Template: alternc-nss/login_shell
+Type: string
+Default: /bin/false
+Description: Default login shell to use :
+ Set shell to apply to each alternc account
+ .
+ Saved in /etc/alternc/local.sh

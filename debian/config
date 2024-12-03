@@ -1,0 +1,10 @@
+#! /bin/bash
+# debconf config script
+#
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_input high alternc-nss/login_shell || true
+db_go || true
