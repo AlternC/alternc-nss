@@ -5,6 +5,7 @@
 set -e
 
 CONFIGFILE="/etc/alternc/local.sh"
+LOGIN_SHELL="/bin/false"
 
 case "$1" in
 	configure)
@@ -17,7 +18,7 @@ case "$1" in
 		grep -Eq "^ *LOGIN_SHELL=" $CONFIGFILE || echo "
 # Set a login shell to use by default
 # default is /bin/false
-LOGIN_SHELL=/bin/false" >> $CONFIGFILE
+LOGIN_SHELL=${LOGIN_SHELL}" >> $CONFIGFILE
 
 		echo -e "\033[31m**********************************************"
 		echo "*                                            *"
