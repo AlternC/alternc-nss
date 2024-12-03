@@ -1,0 +1,17 @@
+#! /bin/bash
+# debconf config script
+#
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+# Source alternc configuration
+. /etc/alternc/local.sh
+
+
+if [ -n "${LOGIN_SHELL}" ]; then
+    db_set alternc-nss/login_shell "${LOGIN_SHELL}"
+fi
+
+db_input high alternc-nss/login_shell || true
+db_go || true
