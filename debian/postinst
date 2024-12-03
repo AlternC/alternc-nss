@@ -22,11 +22,14 @@ case "$1" in
 		sed -ie '/^group:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
 		sed -ie '/^shadow:/ {/extrausers/! s/\(.*\)/\1 extrausers/}' /etc/nsswitch.conf
 
-		# Set default login shell
+		# Enable login shell variable
 		grep -Eq "^ *LOGIN_SHELL=" $CONFIGFILE || echo "
 # Set a login shell to use by default
 # default is /bin/false
-LOGIN_SHELL=${LOGIN_SHELL}" >> $CONFIGFILE
+LOGIN_SHELL=" >> $CONFIGFILE
+
+		# Update/Set login shell variable
+	    sed -i -e "s#^ *LOGIN_SHELL=.*#LOGIN_SHELL=\"$LOGIN_SHELL\"#" $CONFIGFILE
 
 		echo -e "\033[31m**********************************************"
 		echo "*                                            *"
