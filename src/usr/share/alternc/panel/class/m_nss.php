@@ -9,12 +9,16 @@ class m_nss
     protected $passwd_file;
     protected $shadow_file;
     protected $login_shell_default;
-    protected $login_prefix_default;
+    protected $login_prefix;
 
     public function __construct()
     {
         $this->login_shell_default = !empty($GLOBALS['L_LOGIN_SHELL']) ? $GLOBALS['L_LOGIN_SHELL'] : "/bin/false";
-        $this->login_prefix_default = !empty($GLOBALS['L_LOGIN_PREFIX']) ? $GLOBALS['L_LOGIN_PREFIX'] . "_" : "";
+
+        $this->login_prefix = variable_get('nss_login_prefix', '', 'If not empty, override prefix set in local.sh with LOGIN_PREFIX');
+        if (empty($this->login_prefix)) {
+            $this->login_prefix = !empty($GLOBALS['L_LOGIN_PREFIX']) ? $GLOBALS['L_LOGIN_PREFIX'] . "_" : "";
+        }
     }
 
 
@@ -44,7 +48,7 @@ class m_nss
         $db->query("SELECT login,uid FROM `membres`");
         $lines = [];
         while ($db->next_record()) {
-            $lines[] = $this->login_prefix_default . $db->f('login') . ":x:" . $db->f('uid') . ":";
+            $lines[] = $this->login_prefix . $db->f('login') . ":x:" . $db->f('uid') . ":";
         }
 
         $this->group_file = implode("\n", $lines);
@@ -63,7 +67,7 @@ class m_nss
         $db->query("SELECT login,uid FROM `membres`");
         $lines = [];
         while ($db->next_record()) {
-            $lines[] = $this->login_prefix_default . $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":" . $login_shell;
+            $lines[] = $this->login_prefix . $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":" . $login_shell;
         }
 
         $this->passwd_file = implode("\n", $lines);
@@ -85,7 +89,7 @@ class m_nss
             // 7. password inactivity period or '' for no enforcement
             // 8. account expiration date or '' for no expiration
             // 9. reserved
-            $fields = [$this->login_prefix_default . $db->f('login'), '*', '', '', '', '', '', '', ''];
+            $fields = [$this->login_prefix . $db->f('login'), '*', '', '', '', '', '', '', ''];
             $lines[] = implode(':', $fields);
         }
 
