@@ -46,6 +46,9 @@ LOGIN_PREFIX=" >> $CONFIGFILE
 		# Update/Set login prefix variable
 	    sed -i -e "s#^ *LOGIN_PREFIX=.*#LOGIN_PREFIX=\"$LOGIN_PREFIX\"#" $CONFIGFILE
 
+		#Triger alternc-post-install
+		dpkg-trigger alternc-post-install
+
 		echo -e "\033[31m**********************************************"
 		echo "*                                            *"
 		echo "*   ALTERNC          ACTION REQUESTED        *"
