@@ -64,7 +64,7 @@ class m_nss
         $db->query("SELECT login,uid FROM `membres`");
         $lines = [];
         while ($db->next_record()) {
-            $lines[] = $this->login_prefix . $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":" . $login_shell;
+            $lines[] = $this->login_prefix . $db->f('login') . ":x:" . $db->f('uid') . ":" . $db->f('uid') . "::" . getuserpath($db->f('login')) . ":" . $this->login_shell;
         }
 
         $this->passwd_file = implode("\n", $lines);
