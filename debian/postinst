@@ -48,18 +48,6 @@ LOGIN_PREFIX=" >> $CONFIGFILE
 
 		#Triger alternc-post-install
 		dpkg-trigger alternc-post-install
-
-		echo -e "\033[31m**********************************************"
-		echo "*                                            *"
-		echo "*   ALTERNC          ACTION REQUESTED        *"
-		echo "*                                            *"
-		echo "* Please :                                   *"
-		echo "*   run alternc.install to fully update      *"
-		echo "*   update your ssl quota from admin panel   *"
-		echo "*                                            *"
-		echo "**********************************************"
-		echo -e "\033[0m"
-
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)
