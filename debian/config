@@ -15,3 +15,11 @@ fi
 
 db_input high alternc-nss/login_shell || true
 db_go || true
+
+
+if [ -n "${LOGIN_PREFIX}" ]; then
+    db_set alternc-nss/login_prefix "${LOGIN_PREFIX}"
+fi
+
+db_input high alternc-nss/login_prefix || true
+db_go || true

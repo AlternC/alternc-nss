@@ -5,3 +5,11 @@ Description: Default login shell to use :
  Set shell to apply to each alternc account
  .
  Saved in /etc/alternc/local.sh
+
+Template: alternc-nss/login_prefix
+Type: string
+Default:
+Description: Default login prefix to use :
+ Set a prefix to each alternc account
+ .
+ Saved in /etc/alternc/local.sh
