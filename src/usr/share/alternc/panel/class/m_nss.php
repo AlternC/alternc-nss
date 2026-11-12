@@ -38,6 +38,43 @@ class m_nss
         $this->update_files();
     }
 
+    function hook_updatedomains_web_add($subdomid)
+    {
+
+        global $msg,$db,$apache,$L_LOGIN_PREFIX;
+
+        $db->query("SELECT sd.*, dt.only_dns, dt.has_https_option, m.login FROM domaines_type dt, sub_domaines sd LEFT JOIN membres m ON m.uid=sd.compte WHERE dt.name=sd.type AND sd.web_action!='OK' AND id=?;",array($subdomid));
+        $db->next_record();
+        $subdom=$db->Record;
+
+        // security : only AlternC account's UIDs
+        if ($subdom["compte"]<1999) {
+            $msg->raise("ERROR","nss","Subdom ".$subdom["id"]." for domain ".$subdom["sub"].".".$subdom["domaine"]." has id ".$subdom["compte"].". Skipped");
+            return 1;
+        }
+
+        $confdir = $apache->vhostroot."/".substr($subdom["compte"],-1)."/".$subdom["compte"];
+        $subdom["fqdn"]=$subdom["sub"].(($subdom["sub"])?".":"").$subdom["domaine"];
+        $conffile = $confdir."/".$subdom["fqdn"].".conf";
+
+        if (!is_file($conffile)) {
+            $msg->raise("ERROR","nss","Configfile $conffile not found for subdom ".$subdom["id"]." for domain ".$subdom["sub"].".".$subdom["domaine"].". Skipped");
+            return 1;
+        }
+
+        // Override configuration file with vars to replace
+        $tpl=file_get_contents($conffile);
+        $tpl = strtr($tpl, array(
+            "%%LOGIN_PREFIX%%" => !empty($L_LOGIN_PREFIX) ? $L_LOGIN_PREFIX."_" : ""
+        ));
+
+        // and rewrite configuration
+        file_put_contents($conffile, $tpl);
+        $apache->shouldreload=true;
+
+        return 0; // shell meaning => OK ;)
+    }
+
     public function define_files()
     {
         $this->define_group_file();
